@@ -31,3 +31,19 @@ app.get("/login", function (req, res) {
 app.get("/register", function (req, res) {
   res.render("register");
 });
+
+app.post("/register", function (req, res) {
+  const newUser = new User({
+    email: req.body.username,
+    password: req.body.password
+  });
+
+  newUser
+  .save()
+  .then(() => {
+    res.render("secrets");
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+});
